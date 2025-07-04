@@ -38,14 +38,26 @@
 // 
 
 
-let a = "John";
-let b = "Doe";
-let c = 30;
-let d = "Mary";
-let e = "Paul"
-let f = 20;
-let g = c + f;
-let final = "My name is" + " " + a + " " + b + "I am"+" " + c  +" years old" + " " + "and her name is " + d + " " + e + " "  + "she is " + f  + " "+ "years old" + " " +"and our total age is" + " " + g + " " + "years old .";
-console.log(final)
+// let a = "John";
+// let b = "Doe";
+// let c = 30;
+// let d = "Mary";
+// let e = "Paul"
+// let f = 20;
+// let g = c + f;
+// let final = "My name is" + " " + a + " " + b + "I am"+" " + c  +" years old" + " " + "and her name is " + d + " " + e + " "  + "she is " + f  + " "+ "years old" + " " +"and our total age is" + " " + g + " " + "years old .";
+// console.log(final)
 
+
+
+// Javascript Datatypes
+// - There are 8 datatypes in Javascript
+
+// 1.String
+// 2.Number
+// 3.Boolean
+// 4.Undefined
+// 5.Null
+// 6.Symbol
+// 7.Object
 
