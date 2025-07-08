@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comprehensive HTML Course</title>
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+    .header {
+      background-color: #003087;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .progress-bar {
+      width: 200px;
+      height: 10px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background-color: #ff6f61;
+      width: 0;
+      transition: width 0.3s ease;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+    }
+    .sidebar {
+      width: 20%;
+      background-color: #ffffff;
+      padding: 20px;
+      border-right: 1px solid #e0e0e0;
+      height: 100vh;
+      position: fixed;
+      overflow-y: auto;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    }
+    .sidebar h2 {
+      color: #003087;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .sidebar ul li {
+      margin: 10px 0;
+    }
+    .sidebar ul li a {
+      color: #333;
+      text-decoration: none;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    .sidebar ul li a:hover {
+      background-color: #f0f4f8;
+      color: #ff6f61;
+    }
+    .sidebar ul li.completed a::before {
+      content: '✔';
+      color: #ff6f61;
+      margin-right: 10px;
+      font-size: 14px;
+    }
+    .content {
+      margin-left: 25%;
+      width: 75%;
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      min-height: 80vh;
+    }
+    .slide {
+      display: none;
+      padding: 20px;
+    }
+    .slide.active {
+      display: block;
+    }
+    .content h1 {
+      color: #003087;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    .content h2 {
+      color: #ff6f61;
+      font-size: 22px;
+      margin-top: 30px;
+    }
+    .content p, .content ul {
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    .code-example {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-left: 5px solid #ff6f61;
+      margin: 15px 0;
+      font-family: 'Consolas', 'Courier New', monospace;
+      white-space: pre-wrap;
+      border-radius: 4px;
+    }
+    .code-it {
+      background-color: #ff6f61;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      cursor: pointer;
+      margin: 10px 0;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    .code-it:hover {
+      background-color: #e65b50;
+    }
+    .nav-buttons {
+      margin-top: 30px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .nav-buttons button {
+      background-color: #003087;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    .nav-buttons button:disabled {
+      background-color: #b0bec5;
+      cursor: not-allowed;
+    }
+    .nav-buttons button:hover:not(:disabled) {
+      background-color: #00205b;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      z-index: 1000;
+    }
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 20px;
+      width: 80%;
+      max-width: 900px;
+      border-radius: 8px;
+      position: relative;
+    }
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      color: #333;
+    }
+    .close:hover {
+      color: #ff6f61;
+    }
+    .editor {
+      width: 100%;
+      height: 350px;
+      border: 1px solid #e0e0e0;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 14px;
+      padding: 10px;
+      resize: none;
+      margin-bottom: 15px;
+      border-radius: 4px;
+    }
+    .output-frame {
+      width: 100%;
+      height: 250px;
+      border: 1px solid #e0e0e0;
+      background-color: white;
+      margin-top: 10px;
+      border-radius: 4px;
+    }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .content {
+        margin-left: 0;
+        width: 100%;
+      }
+      .modal-content {
+        width: 95%;
+      }
+      .header h1 {
+        font-size: 20px;
+      }
+      .progress-bar {
+        width: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Comprehensive HTML Course</h1>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="sidebar">
+      <h2>Course Modules</h2>
+      <ul>
+        <li><a data-slide="0">1. Introduction to HTML</a></li>
+        <li><a data-slide="1">2. HTML Structure</a></li>
+        <li><a data-slide="2">3. HTML Elements</a></li>
+        <li><a data-slide="3">4. HTML Attributes</a></li>
+        <li><a data-slide="4">5. HTML Headings</a></li>
+        <li><a data-slide="5">6. HTML Paragraphs</a></li>
+        <li><a data-slide="6">7. HTML Links</a></li>
+        <li><a data-slide="7">8. HTML Images</a></li>
+        <li><a data-slide="8">9. HTML Lists</a></li>
+        <li><a data-slide="9">10. HTML Forms</a></li>
+        <li><a data-slide="10">11. HTML Tables</a></li>
+        <li><a data-slide="11">12. Semantic HTML</a></li>
+        <li><a data-slide="12">13. HTML Multimedia</a></li>
+      </ul>
+    </div>
+    <div class="content">
+      <div class="slide active" id="slide-0">
+        <h2>1. Introduction to HTML</h2>
+        <p>HTML (HyperText Markup Language) is the foundation of web development, used to structure content on the internet.</p>
+        <ul>
+          <li>Defines the structure and layout of web pages</li>
+          <li>Combines with CSS for styling and JavaScript for interactivity</li>
+          <li>Supported by all modern browsers</li>
+        </ul>
+        <h3>Example 1: Simple HTML Page</h3>
+        <div class="code-example">
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>My First Page</title>
+          </head>
+          <body>
+            <h1>Welcome to HTML</h1>
+            <p>This is a paragraph.</p>
+          </body>
+          </html>
+        </div>
+        <button class="code-it" data-code='<!DOCTYPE html>\n<html>\n<head>\n  <title>My First Page</title>\n</head>\n<body>\n  <h1>Welcome to HTML</h1>\n  <p>This is a paragraph.</p>\n</body>\n</html>'>Code It!</button>
+        <h3>Example 2: HTML with CSS</h3>
+        <div class="code-example">
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <title>Styled Page</title>
+            <style>
+              h1 { color: navy; }
+              p { font-size: 16px; }
+            </style>
+          </head>
+          <body>
+            <h1>Styled Heading</h1>
+            <p>This paragraph has custom styling.</p>
+          </body>
+          </html>
+        </div>
+        <button class="code-it" data-code='<!DOCTYPE html>\n<html>\n<head>\n  <title>Styled Page</title>\n  <style>\n    h1 { color: navy; }\n    p { font-size: 16px; }\n  </style>\n</head>\n<body>\n  <h1>Styled Heading</h1>\n  <p>This paragraph has custom styling.</p>\n</body>\n</html>'>Code It!</button>
+      </div>
+
+      <div class="slide" id="slide-1">
+        <h2>2. HTML Structure</h2>
+        <p>HTML documents follow a standard structure to ensure compatibility and proper rendering.</p>
+        <ul>
+          <li><strong><!DOCTYPE html></strong>: Specifies HTML5</li>
+          <li><strong><html></strong>: Root element</li>
+          <li><strong><head></strong>: Metadata and resources</li>
+          <li><strong><body></strong>: Visible content</li>
+        </ul>
+        <h3>Example 1: Basic Structure</h3>
+        <div class="code-example">
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <title>Basic Structure</title>
+          </head>
+          <body>
+            <h1>Hello, World!</h1>
+          </body>
+          </html>
+        </div>
+        <button class="code-it" data-code='<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <title>Basic Structure</title>\n</head>\n<body>\n  <h1>Hello, World!</h1>\n</body>\n</html>'>Code It!</button>
+        <h3>Example 2: Structure with Metadata</h3>
+        <div class="code-example">
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Enhanced Structure</title>
+          </head>
+          <body>
+            <h1>Web Page</h1>
+            <p>Responsive design enabled.</p>
+          </body>
+          </html>
+        </div>
+        <button class="code-it" data-code='<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <title>Enhanced Structure</title>\n</head>\n<body>\n  <h1>Web Page</h1>\n  <p>Responsive design enabled.</p>\n</body>\n</html>'>Code It!</button>
+      </div>
+
+      <div class="slide" id="slide-2">
+        <h2>3. HTML Elements</h2>
+        <p>Elements are the core components of HTML, defined by tags enclosing content.</p>
+        <h3>Example 1: Basic Elements</h3>
+        <div class="code-example">
+          <h1>Main Heading</h1>
+          <p>This is a paragraph.</p>
+          <div>Container element</div>
+        </div>
+        <button class="code-it" data-code='<h1>Main Heading</h1>\n<p>This is a paragraph.</p>\n<div>Container element</div>'>Code It!</button>
+        <h3>Example 2: Nested Elements</h3>
+        <div class="code-example">
+          <div>
+            <h2>Subheading</h2>
+            <p>Nested inside a div.</p>
+          </div>
+        </div>
+        <button class="code-it" data-code='<div>\n  <h2>Subheading</h2>\n  <p>Nested inside a div.</p>\n</div>'>Code It!</button>
+      </div>
+
+      <div class="slide" id="slide-3">
+        <h2>4. HTML Attributes</h2>
+        <p>Attributes provide additional information about elements, included in the start tag.</p>
+        <h3>Example 1: ID and Class</h3>
+        <div class="code-example">
+          <div id="unique" class="box">
+            <p>Element with ID and class.</p>
+          </div>
+        </div>
+        <button class="code-it" data-code='<div id="unique" class="box">\n  <p>Element with ID and class.</p>\n</div>'>Code It!</button>
+        <h3>Example 2: Style Attribute</h3>
+        <div class="code-example">
+          <p style="color: blue; font-size: 18px;">Styled paragraph</p>
+        </div>
+        <button class="code-it" data-code='<p style="color: blue; font-size: 18px;">Styled paragraph</p>'>Code It!</button>
+      </div>
+
+      <div class="slide" id="slide-4">
+        <h2>5. HTML Headings</h2>
+        <p>Headings (<code>h1</code> to <code>h6</code>) define content hierarchy.</p>
+        <h3>Example 1: Heading Levels</h3>
+        <div class="code-example">
+          <h1>Level 1</h1>
+          <h2>Level 2</h2>
+          <h3>Level 3</h3>
+        </div>
+        <button class="code-it" data-code='<h1>Level 1</h1>\n<h2>Level 2</h2>\n<h3>Level 3</h3>'>Code It!</button>
+        <h3>Example 2: Styled Heading</h3>
+        <div class="code-example">
+          <h1 style="color: navy; text-align: center;">Centered Heading</h1>
+        </div>
+        <button class="code-it" data-code='<h1 style="color: navy; text-align: center;">Centered Heading</h1>'>Code It!</button>
+      </div>
+
+      <div class="slide" id="slide-5">
+        <h2>6. HTML Paragraphs</h2>
+        <p>Paragraphs (<code>p</code>) are used for text blocks.</p>
+        <h3>Example 1: Basic Paragraphs</h3>
+        <div class="code-example">
+          <p>First paragraph.</p>
+          <p>Second paragraph.</p>
+        </div>
+        <button class="code-it" data-code='<p>First paragraph.</p>\n<p>Second paragraph.</p>'>Code It!</button>
+        <h3>Example 2: Paragraph with Formatting</h3>
+        <div class="code-example">
+          <p>This is a <strong>bold</strong> and <em>italic</em> paragraph.</p>
+        </div>
+        <button class="code-it" data-code='<p>This is a <strong>bold</strong> and <em>italic</em> paragraph.</p>'>Code It!</button>
+      </div>
+
+      <div class="slide" id="slide-6">
+        <h2>7. HTML Links</h2>
+        <p>Links (<code>a</code>) connect pages using the <code>href</code> attribute.</p>
+        <h3>Example 1: External Link</h3>
+        <div class="code-example">
+          <a href="https://www.example.com">Visit Example</a>
+        </div>
+        <button class="code-it" data-code='<a href="https://www.example.com">Visit Example</a>'>Code It!</button>
+        <h3>Example 2: Internal Link</h3>
+        <div class="code-example">
+          <a href="#section1">Jump to Section</a>
+          <div id="section1">Target Section</div>
+        </div>
+        <button class="code-it" data-code='<a href="#section1">Jump to Section</a>\n<div id="section1">Target Section</div>'>Code It!</button>
+      </div>
+
+      <div class="slide" id="slide-7">
+        <h2>8. HTML Images</h2>
+        <p>Images (<code>img</code>) embed visuals with <code>src</code> and <code>alt</code> attributes.</p>
+        <h3>Example 1: Basic Image</h3>
+        <div class="code-example">
+          <img src="https://via.placeholder.com/150" alt="Sample Image">
+        </div>
+        <button class="code-it" data-code='<img src="https://via.placeholder.com/150" alt="Sample Image">'>Code It!</button>
+        <h3>Example 2: Styled Image</h3>
+        <div class="code-example">
+          <img src="https://via.placeholder.com/200" alt="Styled Image" style="border: 2px solid navy; border-radius: 5px;">
+        </div>
+        <button class="code-it" data-code='<img src="https://via.placeholder.com/200" alt="Styled Image" style="border: 2px solid navy; border-radius: 5px;">'>Code It!</button>
+      </div>
+
+      <div class="slide" id="slide-8">
+        <h2>9. HTML Lists</h2>
+        <p>Lists can be unordered (<code>ul</code>) or ordered (<code>ol</code>) with <code>li</code> items.</p>
+        <h3>Example 1: Unordered List</h3>
+        <div class="code-example">
+          <ul>
+            <li>Apple</li>
+            <li>Banana</li>
+            <li>Orange</li>
+          </ul>
+        </div>
+        <button class="code-it" data-code='<ul>\n  <li>Apple</li>\n  <li>Banana</li>\n  <li>Orange</li>\n</ul>'>Code It!</button>
+        <h3>Example 2: Ordered List</h3>
+        <div class="code-example">
+          <ol>
+            <li>First Step</li>
+            <li>Second Step</li>
+            <li>Third Step</li>
+          </ol>
+        </div>
+        <button class="code-it" data-code='<ol>\n  <li>First Step</li>\n  <li>Second Step</li>\n  <li>Third Step</li>\n</ol>'>Code It!</button>
+      </div>
+
+      <div class="slide" id="slide-9">
+        <h2>10. HTML Forms</h2>
+        <p>Forms (<code>form</code>) collect user input with elements like <code>input</code>, <code>textarea</code>, and <code>button</code>.</p>
+        <h3>Example 1: Simple Form</h3>
+        <div class="code-example">
+          <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <input type="submit" value="Submit">
+          </form>
+        </div>
+        <button class="code-it" data-code='<form>\n  <label for="name">Name:</label>\n  <input type="text" id="name" name="name">\n  <input type="submit" value="Submit">\n</form>'>Code It!</button>
+        <h3>Example 2: Form with Multiple Inputs</h3>
+        <div class="code-example">
+          <form>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message"></textarea>
+            <input type="submit" value="Send">
+          </form>
+        </div>
+        <button class="code-it" data-code='<form>\n  <label for="email">Email:</label>\n  <input type="email" id="email" name="email">\n  <label for="message">Message:</label>\n  <textarea id="message" name="message"></textarea>\n  <input type="submit" value="Send">\n</form>'>Code It!</button>
+      </div>
+
+      <div class="slide" id="slide-10">
+        <h2>11. HTML Tables</h2>
+        <p>Tables (<code>table</code>) organize data in rows and columns.</p>
+        <h3>Example 1: Basic Table</h3>
+        <div class="code-example">
+          <table border="1">
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+            </tr>
+            <tr>
+              <td>John</td>
+              <td>30</td>
+            </tr>
+            <tr>
+              <td>Jane</td>
+              <td>25</td>
+            </tr>
+          </table>
+        </div>
+        <button class="code-it" data-code='<table border="1">\n  <tr>\n    <th>Name</th>\n    <th>Age</th>\n  </tr>\n  <tr>\n    <td>John</td>\n    <td>30</td>\n  </tr>\n  <tr>\n    <td>Jane</td>\n    <td>25</td>\n  </tr>\n</table>'>Code It!</button>
+        <h3>Example 2: Styled Table</h3>
+        <div class="code-example">
+          <table style="border-collapse: collapse; width: 100%;">
+            <tr style="background-color: navy; color: white;">
+              <th>Product</th>
+              <th>Price</th>
+            </tr>
+            <tr>
+              <td>Book</td>
+              <td>$10</td>
+            </tr>
+          </table>
+        </div>
+        <button class="code-it" data-code='<table style="border-collapse: collapse; width: 100%;">\n  <tr style="background-color: navy; color: white;">\n    <th>Product</th>\n    <th>Price</th>\n  </tr>\n  <tr>\n    <td>Book</td>\n    <td>$10</td>\n  </tr>\n</table>'>Code It!</button>
+      </div>
+
+      <div class="slide" id="slide-11">
+        <h2>12. Semantic HTML</h2>
+        <p>Semantic elements like <code>header</code>, <code>nav</code>, and <code>article</code> improve accessibility and SEO.</p>
+        <h3>Example 1: Semantic Layout</h3>
+        <div class="code-example">
+          <header>
+            <h1>Website Title</h1>
+          </header>
+          <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+          </nav>
+          <main>
+            <article>
+              <h2>Article Title</h2>
+              <p>Content here.</p>
+            </article>
+          </main>
+          <footer>
+            <p>Footer content</p>
+          </footer>
+        </div>
+        <button class="code-it" data-code='<header>\n  <h1>Website Title</h1>\n</header>\n<nav>\n  <a href="#home">Home</a>\n  <a href="#about">About</a>\n</nav>\n<main>\n  <article>\n    <h2>Article Title</h2>\n    <p>Content here.</p>\n  </article>\n</main>\n<footer>\n  <p>Footer content</p>\n</footer>'>Code It!</button>
+        <h3>Example 2: Semantic with Section</h3>
+        <div class="code-example">
+          <section>
+            <h2>Section Heading</h2>
+            <p>This is a section of content.</p>
+          </section>
+        </div>
+        <button class="code-it" data-code='<section>\n  <h2>Section Heading</h2>\n  <p>This is a section of content.</p>\n</section>'>Code It!</button>
+      </div>
+
+      <div class="slide" id="slide-12">
+        <h2>13. HTML Multimedia</h2>
+        <p>HTML supports audio and video with <code>audio</code> and <code>video</code> tags.</p>
+        <h3>Example 1: Audio Element</h3>
+        <div class="code-example">
+          <audio controls>
+            <source src="sample.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        <button class="code-it" data-code='<audio controls>\n  <source src="sample.mp3" type="audio/mpeg">\n  Your browser does not support the audio element.\n</audio>'>Code It!</button>
+        <h3>Example 2: Video Element</h3>
+        <div class="code-example">
+          <video width="320" height="240" controls>
+            <source src="sample.mp4" type="video/mp4">
+            Your browser does not support the video element.
+          </video>
+        </div>
+        <button class="code-it" data-code='<video width="320" height="240" controls>\n  <source src="sample.mp4" type="video/mp4">\n  Your browser does not support the video element.\n</video>'>Code It!</button>
+      </div>
+
+      <div class="nav-buttons">
+        <button id="prev-btn" disabled>Previous</button>
+        <button id="next-btn">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="code-modal">
+    <div class="modal-content">
+      <span class="close">×</span>
+      <textarea class="editor" id="code-editor"></textarea>
+      <button class="code-it" onclick="runCode()">Run Code</button>
+      <iframe class="output-frame" id="output-frame"></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Slide navigation and progress tracking
+    const slides = document.querySelectorAll('.slide');
+    const sidebarLinks = document.querySelectorAll('.sidebar a');
+    const progressFill = document.getElementById('progress-fill');
+    let currentSlide = 0;
+    let completedSlides = new Set();
+
+    function updateProgress() {
+      const progress = (completedSlides.size / slides.length) * 100;
+      progressFill.style.width = `${progress}%`;
+    }
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      document.getElementById('prev-btn').disabled = index === 0;
+      document.getElementById('next-btn').disabled = index === slides.length - 1;
+      completedSlides.add(index);
+      sidebarLinks[index].parentElement.classList.add('completed');
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.getElementById('next-btn').addEventListener('click', () => {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        showSlide(currentSlide);
+      }
+    });
+
+    document.getElementById('prev-btn').addEventListener('click', () => {
+      if (currentSlide > 0) {
+        currentSlide--;
+        showSlide(currentSlide);
+      }
+    });
+
+    sidebarLinks.forEach(anchor => {
+      anchor.addEventListener('click', function() {
+        currentSlide = parseInt(this.getAttribute('data-slide'));
+        showSlide(currentSlide);
+      });
+    });
+
+    // Code editor modal
+    const modal = document.getElementById('code-modal');
+    const codeEditor = document.getElementById('code-editor');
+    const closeBtn = document.querySelector('.close');
+
+    document.querySelectorAll('.code-it').forEach(button => {
+      button.addEventListener('click', function() {
+        const code = this.getAttribute('data-code');
+        codeEditor.value = code;
+        modal.style.display = 'block';
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    function runCode() {
+      const code = codeEditor.value;
+      const outputFrame = document.getElementById('output-frame');
+      const doc = outputFrame.contentDocument || outputFrame.contentWindow.document;
+      doc.open();
+      doc.write(code);
+      doc.close();
+    }
+
+    // Initialize progress
+    showSlide(0);
+  </script>
+</body>
+</html>

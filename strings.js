@@ -122,25 +122,43 @@
 
 
 // Example 1 - Split by Space
-let sentence = "Javascript is amazing" ;
-console.log(sentence)
-let words =  sentence.split(" ")
-console.log(words)
+// let sentence = "Javascript is amazing" ;
+// console.log(sentence)
+// let words =  sentence.split(" ")
+// console.log(words)
 
-// Example 2 - Split by Comma
-let fruits = "Apple,Banana,Mango,Orange";
-console.log(fruits);
-let lists = fruits.split(",");
-console.log(lists)
+// // Example 2 - Split by Comma
+// let fruits = "Apple,Banana,Mango,Orange";
+// console.log(fruits);
+// let lists = fruits.split(",");
+// console.log(lists)
 
-// Example 3 - Split Into Characters
-let word = "hello";
-let letters = word.split("")
-console.log(letters)
+// // Example 3 - Split Into Characters
+// let word = "hello";
+// let letters = word.split("")
+// console.log(letters)
 
-// Example 4  - Split with limit
-let colors = "Red-Blue-Green-Yellow";
-console.log(colors);
-let parts = colors.split("-", 3)
-console.log(parts);
+// // Example 4  - Split with limit
+// let colors = "Red-Blue-Green-Yellow";
+// console.log(colors);
+// let parts = colors.split("-", 3)
+// console.log(parts);
 
+// Clean up the following variable to give the clean version in lower case. Using inbuilt methods in the string class
+// f_name = “  JOHn  .” to “john”
+// Slice the below string to get you the resulting sentence:
+// sentence_one = “The Dog Breed is German Shepherd” only display “Breed is German”
+// sentence_two = “Defeats for the Clinton forces, this was her moment of triumph” only display “Clinton forces”
+// Split the below sentence using a semicolon i.e ; And display length of the result. 
+// “The lazy dog; ran so fast; it hit the wall.” 
+
+
+
+let f_name = "  JOHn  .";
+console.log(f_name)
+let f_names  = f_name.trim();
+console.log(f_names)
+let f_namess  = f_name.slice(0,6);
+console.log(f_namess)
+let f_namesss = f_namess.toLowerCase()
+console.log(f_namesss)
