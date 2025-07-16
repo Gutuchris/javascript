@@ -119,16 +119,16 @@
 
 // 9.reverse() - Used to reverse the array
 
-let groupA = ["Alice", "Bob", "James", "Morgan"];
-console.log("This is group A students -->",groupA)
-let groupB = ["Chris", "Ken", "Sam", "Stacy"];
-console.log("This is group B students -->",groupB)
-let groupC = ["Peter", "Grace", "Allan", "Bruno"];
-console.log("This is group C students -->",groupC)
-// concat method
+// let groupA = ["Alice", "Bob", "James", "Morgan"];
+// console.log("This is group A students -->",groupA)
+// let groupB = ["Chris", "Ken", "Sam", "Stacy"];
+// console.log("This is group B students -->",groupB)
+// let groupC = ["Peter", "Grace", "Allan", "Bruno"];
+// console.log("This is group C students -->",groupC)
+// // concat method
 
-let total = groupA.concat(groupB, groupC);
-console.log("This is are the total students -->",total)
+// let total = groupA.concat(groupB, groupC);
+// console.log("This is are the total students -->",total)
 
 // // indexOf method
 // console.log(total.indexOf("Ken"))
@@ -143,8 +143,8 @@ console.log("This is are the total students -->",total)
 
 
 // Reverse method 
-total.reverse();
-console.log(total)
+// total.reverse();
+// console.log(total)
 
 
 
@@ -172,29 +172,54 @@ using number methods
 
 NB - Use console.log to display each soln
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 */
+
+// 10.sort() - Arranges items in an array alphabetically
+
+// let fruits = ["banana", "apple", "mango", "orange"];
+// console.log(fruits)
+// fruits.sort();
+// console.log(fruits)
+
+let nums = [100, 20, 3];
+nums.sort();
+
+console.log(nums)
+
+// 11.join() - It is used to join all items in array into a single string
+
+// let words = ["I" , "love", "coding", "very" , "much"]
+// console.log(words)
+
+// let sentence = words.join(" ");
+// console.log(sentence)
+
+// let sentence2 = words.join();
+// console.log(sentence2)
+
+
+// 12.map() 
+// Used to create  a new array by transforming or mapping each item of an existing array using a callback function
+
+
+// Syntax
+
+// array.map(function(CurrentValue, index, array))
+
+
+// let numbers = [1,2,3]
+// console.log(numbers)
+// let  doubled = numbers.map(num => num * 2);
+// console.log(doubled)
+
+// Convert this into uppercase
+// let names = ["alice", "bob", "chris"];
+
+// // Convert the numbers into strings
+// let numbers = [1,2,3,4,5]
+// let num2 =numbers.map(numbers => numbers.toString())
+// console.log(num2)
+// // Get the first letters
+// let words = ["Dog", "Cat", "Elephant"]
+// let firstLetter = words.map(word => word[0]);
+// console.log(firstLetter)
