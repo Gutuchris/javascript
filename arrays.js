@@ -182,9 +182,10 @@ NB - Use console.log to display each soln
 // console.log(fruits)
 
 let nums = [100, 20, 3];
-nums.sort();
+let nums2 = nums.map(num => num.toString())
+nums2.sort();
 
-console.log(nums)
+console.log(nums2)
 
 // 11.join() - It is used to join all items in array into a single string
 
