@@ -1,0 +1,210 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Classic Calculator</title>
+  <style>
+    body {
+      background-color: #2e2e2e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: sans-serif;
+    }
+
+    .calculator {
+      background: #ccc;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .display {
+      width: 100%;
+      height: 50px;
+      background: #fff;
+      margin-bottom: 15px;
+      border: none;
+      text-align: right;
+      font-size: 24px;
+      padding: 10px;
+      border-radius: 10px;
+      box-sizing: border-box;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 60px);
+      grid-gap: 10px;
+      justify-content: center;
+    }
+
+    button {
+      width: 60px;
+      height: 60px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      background: #eee;
+      cursor: pointer;
+      box-shadow: inset 0 -4px 0 rgba(0,0,0,0.2);
+      transition: 0.2s;
+    }
+
+    button.operator {
+      background: #333;
+      color: #fff;
+    }
+
+    button.clear {
+      background: #d9534f;
+      color: white;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+
+<div class="calculator">
+  <input type="text" class="display" id="display" >
+
+  <div class="buttons">
+    <button onclick="appendValue('7')">7</button>
+    <button onclick="appendValue('8')">8</button>
+    <button onclick="appendValue('9')">9</button>
+    <button class="operator" onclick="appendValue('+')">+</button>
+
+    <button onclick="appendValue('4')">4</button>
+    <button onclick="appendValue('5')">5</button>
+    <button onclick="appendValue('6')">6</button>
+    <button class="operator" onclick="appendValue('-')">-</button>
+
+    <button onclick="appendValue('1')">1</button>
+    <button onclick="appendValue('2')">2</button>
+    <button onclick="appendValue('3')">3</button>
+    <button class="operator" onclick="appendValue('*')">×</button>
+
+    <button class="clear" onclick="clearDisplay()">C</button>
+    <button onclick="appendValue('0')">0</button>
+    <button onclick="calculate()">=</button>
+    <button class="operator" onclick="appendValue('/')">÷</button>
+  </div>
+</div>
+
+<script>
+  const display = document.getElementById('display');
+
+  function appendValue(val) {
+    display.value += val;
+  }
+
+  function clearDisplay() {
+    display.value = '';
+  }
+
+  function calculate() {
+    try {
+      display.value = eval(display.value);
+    } catch {
+      display.value = 'Error';
+    }
+  }
+</script>
+
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<h2>Information table</h2>
+<body>
+<style>
+ table {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 10px;
+      text-align: left;}
+
+th{border: 1px solid black;
+      border-collapse: collapse;
+      padding: 10px;
+      text-align: left;}
+      
+      td{border: 1px solid black;
+      border-collapse: collapse;
+      padding: 10px;
+      text-align: left;}
+
+</style>
+
+
+   
+   <form id="inputform1">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="first-Name" name="firstName" required><br>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="last-Name" name="lastName" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <button>SUBMIT</button>
+  </form>
+
+<table>
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</table>
+
+
+
+  
+
+
+
+
+
+
+
+
+<script src="myjsform.js"></script>
+
+</body>
+</html>
